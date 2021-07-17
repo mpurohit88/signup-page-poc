@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 
-import transactionWorkflow from './transactionWorkflow/reducer'
+import signin from './signin/reducer'
 
 const logger = createLogger();
 
-const initialState = { businessEntity: [] };
+const initialState = { signin: false };
 
-const store = createStore(transactionWorkflow, initialState, applyMiddleware(logger));
+const store = createStore(signin, initialState, applyMiddleware(logger));
 
 export default store;

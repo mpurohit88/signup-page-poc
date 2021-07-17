@@ -5,7 +5,7 @@ const MainNavbar = () => (
     elevation={0}
   >
     <Toolbar sx={{ height: 64 }}>
-      American Express | Transaction Worflow Excercise
+      POC | Sign Up & Sign In
     </Toolbar>
   </AppBar>
 );
