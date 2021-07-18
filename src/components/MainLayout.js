@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
@@ -40,7 +40,7 @@ export default function MainLayout() {
   const classes = useStyles();
   const history = useHistory();
 
-  const { isLoggedIn } = useSelector(state => state.signin);
+  const { isLoggedIn } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -54,9 +54,6 @@ export default function MainLayout() {
       <CssBaseline />
       <div className={classes.paper}>
         <Switch>
-          <Route exact path="/">
-            <SignUp classes={classes} />
-          </Route>
           <Route path="/signin">
             <SignIn classes={classes} />
           </Route>
@@ -66,6 +63,7 @@ export default function MainLayout() {
           <Route exact path="/home">
             <Home />
           </Route>
+          <Redirect to="signup" />
         </Switch>
       </div>
     </Container>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
-import { signIn } from '../redux/signin/action';
+import { signIn } from '../redux/auth/action';
 
 import { PrimaryButton, InputBox, Heading, LockAvatar } from './materialUI';
 

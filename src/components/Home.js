@@ -1,13 +1,14 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
-import { signOut } from '../redux/signin/action';
+import { signOut } from '../redux/auth/action';
 
 export default function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const { isLoggedIn } = useSelector(state => state.signin);
+  const { isLoggedIn } = useSelector(state => state.auth);
   const { profile } = useSelector(state => state.user);
 
   if (!isLoggedIn) {
@@ -18,10 +19,14 @@ export default function Home() {
     dispatch(signOut());
   }
 
+  useEffect(() => {
+
+  });
+
   const displyaProfile = () => {
-    for (const [key, value] of Object.entries(profile || {})) {
-      return `${key}: ${value}`;
-    }
+    return Object.entries(profile || {}).map((obj) => {
+      return <div>{obj[0]}: {obj[1]}</div>;
+    })
   }
 
   return <>

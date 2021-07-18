@@ -1,6 +1,6 @@
 import { SIGN_IN, SIGN_OUT } from './action';
 
-function signIn(state = {}, action) {
+function auth(state = {}, action) {
   switch (action.type) {
     case SIGN_IN:
       return {
@@ -17,4 +17,4 @@ function signIn(state = {}, action) {
   }
 }
 
-export default signIn;
+export default auth;
