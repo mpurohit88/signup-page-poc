@@ -3,11 +3,7 @@ import {
 } from '@material-ui/core';
 
 const Heading = ({ text }) => (
-  <Typography
-    color="textSecondary"
-    gutterBottom
-    variant="h6"
-  >
+  <Typography component="h1" variant="h5">
     {text}
   </Typography>
 )

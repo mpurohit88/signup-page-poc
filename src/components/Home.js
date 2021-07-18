@@ -1,17 +1,23 @@
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
 
-import Link from '@material-ui/core/Link';
+import { signOut } from '../redux/signin/action';
 
 export default function Home() {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const { isLoggedIn } = useSelector(state => state);
 
   if (!isLoggedIn) {
     history.push("/signin");
   }
 
-  return <><h1>Welcome Home</h1><Link href="/signin" variant="body2">
+  const handleOnClick = () => {
+    dispatch(signOut());
+  }
+
+  return <><h1>Welcome Home</h1><Link to="/signin" onClick={handleOnClick} variant="body2">
     {"Log Out"}
   </Link></>
 }

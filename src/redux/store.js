@@ -5,7 +5,7 @@ import signin from './signin/reducer'
 
 const logger = createLogger();
 
-const initialState = { signin: false };
+const initialState = { isLoggedIn: false };
 
 const store = createStore(signin, initialState, applyMiddleware(logger));
 

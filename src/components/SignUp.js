@@ -1,43 +1,44 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
+
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  }
-}));
+import { PrimaryButton, InputBox, Heading, LockAvatar } from './materialUI';
 
-export default function SignUp() {
-  const classes = useStyles();
+const inputFields = [
+  { name: "firstName", id: "firstName", label: "First Name", autoComplete: "fname" },
+  { name: "lastName", id: "lastName", label: "Last Name", autoComplete: "lname" },
+  { name: "email", id: "email", label: "Email Address", autoComplete: "email" },
+  { name: "password", id: "password", label: "Password", autoComplete: "current-password" }
+]
 
+export default function SignUp({ classes, onClickHandler }) {
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign Up
-        </Typography>
-        <Grid container>
+    <>
+      <LockAvatar classes={classes} />
+      <Heading text="Sign up" />
+      <form className={classes.form} noValidate>
+        <Grid container spacing={2}>
+          {
+            inputFields.map(inputField => {
+              return <InputBox id={inputField.name}
+                label={inputField.label}
+                name={inputField.name}
+                autoComplete={inputField.autoComplete} />
+            })
+          }
+        </Grid>
+
+        <PrimaryButton text={"Sign Up"} className={classes.submit} onClick={onClickHandler} />
+
+        <Grid container justifyContent="flex-end">
           <Grid item>
-            <Link href="/signin" variant="body2">
-              {"Already have an account? Sign in"}
+            <Link to="/signin" variant="body2">
+              Already have an account? Sign in
             </Link>
           </Grid>
         </Grid>
-      </div>
-    </Container>
+      </form>
+    </>
   );
 }
