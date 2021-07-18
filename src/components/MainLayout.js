@@ -1,15 +1,14 @@
+import { useEffect } from 'react';
 import {
   Switch,
   Route,
 } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-import { signIn } from '../redux/signin/action';
 
 import MainNavbar from './MainNavbar';
 import SignIn from './SignIn';
@@ -40,17 +39,14 @@ const useStyles = makeStyles((theme) => ({
 export default function MainLayout() {
   const classes = useStyles();
   const history = useHistory();
-  const dispatch = useDispatch();
 
-  const { isLoggedIn } = useSelector(state => state);
+  const { isLoggedIn } = useSelector(state => state.signin);
 
-  const onClickHandler = () => {
-    dispatch(signIn());
-  }
-
-  if (isLoggedIn) {
-    history.push("/home");
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/home");
+    }
+  }, [isLoggedIn])
 
   return <>
     <MainNavbar />
@@ -59,13 +55,13 @@ export default function MainLayout() {
       <div className={classes.paper}>
         <Switch>
           <Route exact path="/">
-            <SignIn classes={classes} onClickHandler={onClickHandler} />
+            <SignUp classes={classes} />
           </Route>
           <Route path="/signin">
-            <SignIn classes={classes} onClickHandler={onClickHandler} />
+            <SignIn classes={classes} />
           </Route>
           <Route path="/signup">
-            <SignUp classes={classes} onClickHandler={onClickHandler} />
+            <SignUp classes={classes} />
           </Route>
           <Route exact path="/home">
             <Home />

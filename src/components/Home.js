@@ -7,7 +7,8 @@ export default function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const { isLoggedIn } = useSelector(state => state);
+  const { isLoggedIn } = useSelector(state => state.signin);
+  const { profile } = useSelector(state => state.user);
 
   if (!isLoggedIn) {
     history.push("/signin");
@@ -17,7 +18,18 @@ export default function Home() {
     dispatch(signOut());
   }
 
-  return <><h1>Welcome Home</h1><Link to="/signin" onClick={handleOnClick} variant="body2">
-    {"Log Out"}
-  </Link></>
+  const displyaProfile = () => {
+    for (const [key, value] of Object.entries(profile || {})) {
+      return `${key}: ${value}`;
+    }
+  }
+
+  return <>
+    <h1>Welcome Home</h1>
+    {
+      displyaProfile()
+    }
+    <Link to="/signin" onClick={handleOnClick} variant="body2">
+      {"Log Out"}
+    </Link></>
 }
